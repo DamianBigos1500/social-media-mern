@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
-function App() {
+interface LoginProps {}
+
+const Login: FC<LoginProps> = ({}) => {
   const googleAuth = () => {
     window.open(`http://127.0.0.1:8000/auth/google`, '_self');
   };
@@ -15,14 +16,11 @@ function App() {
           <button className={''} onClick={googleAuth}>
             <span>Sing up with Google</span>
           </button>
-          <button className={''} onClick={googleAuth}>
-            <span>Logout</span>
-          </button>
           <p className={''}></p>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Login;
