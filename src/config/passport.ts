@@ -1,7 +1,6 @@
 import passport from 'passport';
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-
-console.log(process.env.GOOGLE_CLIENT_ID);
+var GithubStrategy = require('passport-github2').Strategy;
 
 passport.use(
   new GoogleStrategy(
@@ -9,6 +8,19 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
+    },
+    function (accessToken: any, refreshToken: any, profile: any, done: any) {
+      done(null, profile);
+    }
+  )
+);
+
+passport.use(
+  new GithubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: '/auth/github/callback',
     },
     function (accessToken: any, refreshToken: any, profile: any, done: any) {
       done(null, profile);

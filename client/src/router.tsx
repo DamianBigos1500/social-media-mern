@@ -4,6 +4,7 @@ import RootLayout from './layouts/RootLayout';
 
 const Home = React.lazy(() => import('./page/Home'));
 const Login = React.lazy(() => import('./page/Login'));
+const NotFound = React.lazy(() => import('./page/NotFound'));
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,16 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <RootLayout />,
+    children: [
+      {
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },

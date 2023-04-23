@@ -1,15 +1,15 @@
 import express from 'express';
-import passport from 'passport';
+import passportGoogle from '../controllers/auth/passport/passport-google';
+import passportGithub from '../controllers/auth/passport/passport-github';
 
 const router = express.Router();
 
-router.get('/login/success', (req, res) => {
+router.get('/login/success', (req: any, res) => {
   if (req.user) {
     res.status(200).json({
       success: true,
       message: 'successfull',
       user: req.user,
-      //   cookies: req.cookies
     });
   }
 });
@@ -21,32 +21,18 @@ router.get('/login/failed', (req, res) => {
   });
 });
 
-router.get('/logout', (req, res) => {
-  // @ts-expect-error
-  req.logout();
+router.get('/logout', (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
   res.redirect(process.env.CLIENT_URL!);
 });
 
-router.get(
-  '/google',
-  passport.authenticate('google', { scope: ['email', 'profile'] })
-);
-
-router.get(
-  '/google/callback',
-  passport.authenticate('google', {
-    successRedirect: 'http://127.0.0.1:5173',
-    failureRedirect: '/auth/login/failed',
-  })
-);
-
-router.get('/login/protected', (req, res) => {
-  res.send('hello here');
-});
-
-router.get('/check', (req, res) => {
-  res.json({message:'hello here'});
-});
+router.use(passportGoogle);
+router.use(passportGithub);
 
 // router.get('/github', passport.authenticate('github', { scope: ['profile'] }));
 
