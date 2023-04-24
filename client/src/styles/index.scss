@@ -1,0 +1,21 @@
+:root {
+  --bg-base: #131419;
+  --bg-primary: #1c1c26;
+  --bg-secondary: #292933;
+
+  --cl-base: #fcf9ff;
+  --cl-primary: #9696a0;
+
+  --red-lt: #ee4852;
+  --green-lt: #67c510;
+  --blue-lt: #0078fe;
+
+  --nav-height: 4rem;
+  --content-height: calc(100vh - var(--nav-height));
+}
+
+* {
+  box-sizing: 'border-box';
+  margin: 0;
+  padding: 0;
+}
