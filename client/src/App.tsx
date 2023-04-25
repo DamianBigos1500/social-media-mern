@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
 function App() {
   const googleAuth = () => {
     window.open(`http://127.0.0.1:8000/auth/google`, '_self');

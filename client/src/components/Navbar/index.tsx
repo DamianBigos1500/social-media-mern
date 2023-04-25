@@ -1,15 +1,15 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import styles from './navbar.module.scss';
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
   const { user } = useContext(AuthContext);
-  console.log(user);
 
   return (
-    <div>
+    <div className={styles.navbar}>
       <Link to="/">Home</Link>
       <Link to="/login">Login</Link>
 

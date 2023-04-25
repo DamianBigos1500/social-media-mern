@@ -1,16 +1,18 @@
 import passport from 'passport';
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
-var GithubStrategy = require('passport-github2').Strategy;
-var CustomStrategy = require('passport-custom').Strategy;
+import passportGoogleOauth20 from 'passport-google-oauth20';
+import passportGithub2 from 'passport-github2';
+import passportCustom from 'passport-custom';
+import { db } from '../libs/server/db';
 
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const GoogleStrategy = passportGoogleOauth20.Strategy;
+const GithubStrategy = passportGithub2.Strategy;
+const CustomStrategy = passportCustom.Strategy;
 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientID: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       callbackURL: '/auth/google/callback',
     },
     async function (
@@ -19,7 +21,7 @@ passport.use(
       profile: any,
       done: any
     ) {
-      const currentUser = await prisma.user.upsert({
+      const currentUser = await db.user.upsert({
         where: {
           email: profile._json.email,
         },
@@ -35,7 +37,7 @@ passport.use(
         },
       });
 
-      done(null, currentUser);
+      done(null, profile);
     }
   )
 );
@@ -43,8 +45,8 @@ passport.use(
 passport.use(
   new GithubStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientID: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
       callbackURL: '/auth/github/callback',
       scope: ['user:email'],
     },
@@ -55,23 +57,23 @@ passport.use(
       done: any
     ) {
       console.log(profile);
-      const currentUser = await prisma.user.upsert({
-        where: {
-          email: profile.emails[0].value,
-        },
-        update: {
-          provider: 'github',
-        },
-        create: {
-          first_name: profile._json.name,
-          last_name: '',
-          email: profile.emails[0].value,
-          picture: profile._json.avatar_url,
-          provider: 'github',
-        },
-      });
+      // const currentUser = await prisma.user.upsert({
+      //   where: {
+      //     email: profile.emails[0].value,
+      //   },
+      //   update: {
+      //     provider: 'github',
+      //   },
+      //   create: {
+      //     first_name: profile._json.name,
+      //     last_name: '',
+      //     email: profile.emails[0].value,
+      //     picture: profile._json.avatar_url,
+      //     provider: 'github',
+      //   },
+      // });
 
-      done(null, currentUser);
+      done(null, profile);
     }
   )
 );
@@ -80,7 +82,7 @@ passport.use(
   new CustomStrategy(async function (req: any, done: any) {
     let currentUser;
     try {
-      currentUser = await prisma.user.findUnique({
+      currentUser = await db.user.findUnique({
         where: {
           email: req.body.email,
         },
@@ -89,7 +91,7 @@ passport.use(
       console.log(error);
     }
 
-    done(null, currentUser);
+    done(null, null);
   })
 );
 

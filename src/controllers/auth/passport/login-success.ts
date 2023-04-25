@@ -5,6 +5,12 @@ const loginSuccess = function (req: any, res: any) {
       message: 'successfull',
       user: req.user,
     });
+  } else {
+    res.status(404).json({
+      success: false,
+      message: 'successfull',
+      user: req.user,
+    });
   }
 };
 export default loginSuccess;

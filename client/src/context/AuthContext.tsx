@@ -19,6 +19,7 @@ interface AuthContextProviderProps {
 const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -27,10 +28,15 @@ const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) => {
         );
 
         setUser(response.data.user);
-      } catch (error) {}
+        console.log('error');
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
     };
+
     getUser();
-    setIsLoading(false);
   }, []);
 
   if (isLoading) return null;
