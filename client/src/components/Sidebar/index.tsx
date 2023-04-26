@@ -1,64 +1,18 @@
 import { FC } from 'react';
 import styles from './sidebar.module.scss';
-import { Link } from 'react-router-dom';
+import SidebarUser from '../SidebarUser';
+import SidebarNavigation from '../SidebarNavigation';
 
-interface indexProps {}
+interface SidebarProps {}
 
-const index: FC<indexProps> = ({}) => {
+const Sidebar: FC<SidebarProps> = ({}) => {
   return (
     <div className={styles.sidebar}>
-      <div className={styles.sidebar__nav}>
-        <div className={styles.sidebar__nav_item}>
-          <span className={styles.sidebar__nav_icon}>I</span>
-          <span className={styles.sidebar__nav_link}>
-            <Link to="">Feed</Link>
-          </span>
-        </div>
+      <SidebarUser />
 
-        <div className={styles.sidebar__nav_item}>
-          <span className={styles.sidebar__nav_icon}>I</span>
-          <span className={styles.sidebar__nav_link}>
-            <Link to="">Friends</Link>
-          </span>
-        </div>
-
-        <div className={styles.sidebar__nav_item}>
-          <span className={styles.sidebar__nav_icon}>I</span>
-          <span className={styles.sidebar__nav_link}>
-            <Link to="">Event</Link>
-          </span>
-        </div>
-
-        <div className={styles.sidebar__nav_item}>
-          <span className={styles.sidebar__nav_icon}>I</span>
-          <span className={styles.sidebar__nav_link}>
-            <Link to="">Watch Videos</Link>
-          </span>
-        </div>
-
-        <div className={styles.sidebar__nav_item}>
-          <span className={styles.sidebar__nav_icon}>I</span>
-          <span className={styles.sidebar__nav_link}>
-            <Link to="">Photos</Link>
-          </span>
-        </div>
-
-        <div className={styles.sidebar__nav_item}>
-          <span className={styles.sidebar__nav_icon}>I</span>
-          <span className={styles.sidebar__nav_link}>
-            <Link to="">Files</Link>
-          </span>
-        </div>
-
-        <div className={styles.sidebar__nav_item}>
-          <span className={styles.sidebar__nav_icon}>I</span>
-          <span className={styles.sidebar__nav_link}>
-            <Link to="">Marketplace</Link>
-          </span>
-        </div>
-      </div>
+      <SidebarNavigation />
     </div>
   );
 };
 
-export default index;
+export default Sidebar;

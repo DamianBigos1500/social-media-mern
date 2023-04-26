@@ -1,9 +1,7 @@
 import { FC } from 'react';
 
-interface indexProps {}
-
-const index: FC<indexProps> = ({}) => {
+const NotFound: FC = () => {
   return <div>Page NOT FOUND</div>;
 };
 
-export default index;
+export default NotFound;

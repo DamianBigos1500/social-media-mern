@@ -1,9 +1,8 @@
 import Axios from 'axios';
-
-const baseUrl = 'http://127.0.0.1:8000';
+import BACKEND_URL from '../config/BACKEND_URL';
 
 const axios = Axios.create({
-  baseURL: baseUrl,
+  baseURL: BACKEND_URL,
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json',

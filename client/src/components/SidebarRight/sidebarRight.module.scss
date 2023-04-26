@@ -1,6 +1,53 @@
 .sidebar_right {
   align-self: flex-end;
   height: var(--content-height);
-  width: 14rem;
+  width: 16rem;
   border-left: var(--bg-primary) 1px solid;
+  overflow-y: auto;
+  padding-bottom: 2rem;
+
+  &__friends_content {
+  }
+
+  &__friends {
+    &_title {
+      font-size: 1rem;
+      margin-top: 1rem;
+      margin-left: 1rem;
+      font-weight: 500;
+    }
+
+    &_list {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+  &__friend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+
+    & img {
+      height: 2rem;
+      border-radius: 50%;
+      border: 1px solid var(--cl-base);
+    }
+
+    &_info {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--cl-base);
+    }
+
+    &_active {
+      font-size: 0.6rem;
+      color: var(--cl-primary);
+    }
+  }
 }

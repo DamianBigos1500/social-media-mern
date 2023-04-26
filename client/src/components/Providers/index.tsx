@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import AuthContextProvider from '../../context/AuthContext';
 
-interface indexProps {}
+interface ProvidersProps {}
 
-const index: FC<indexProps> = ({}) => {
+const Providers: FC<ProvidersProps> = ({}) => {
   return (
     <AuthContextProvider>
       <Outlet />
@@ -12,4 +12,4 @@ const index: FC<indexProps> = ({}) => {
   );
 };
 
-export default index;
+export default Providers;

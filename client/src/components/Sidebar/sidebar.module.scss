@@ -1,52 +1,10 @@
 .sidebar {
   height: var(--content-height);
   background: var(--bg-primary);
-  width: 14rem;
-
+  width: 16rem;
+  overflow-x: auto;
+  padding-bottom: 2rem;
+  
   .subsites {
-  }
-
-  &__nav {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-
-    &_item {
-      position: relative;
-      display: flex;
-      align-items: center;
-      margin: 0 0 0 0.6rem;
-      height: 2.4rem;
-
-      &:hover::before {
-        left: -1.2rem;
-      }
-
-      &:hover a {
-        color: var(--cl-base);
-      }
-
-      &::before {
-        content: '_';
-        position: absolute;
-        width: 1rem;
-        background: var(--cl-base);
-        left: -2rem;
-        height: 80%;
-        border-radius: 0.2rem;
-        transition: left 300ms ease-out;
-      }
-    }
-
-    &_icon {
-      width: 2rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    &_link {
-      font-weight: 500;
-    }
   }
 }

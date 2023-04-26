@@ -1,0 +1,52 @@
+.sidebar {
+  &__nav {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    &_item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin: 0 0 0 0.6rem;
+      height: 2.4rem;
+
+      &:hover::before {
+        left: -1.2rem;
+      }
+
+      &:hover span,
+      &:hover svg {
+        color: var(--cl-base);
+      }
+
+      &::before {
+        content: '_';
+        position: absolute;
+        width: 1rem;
+        background: var(--cl-base);
+        left: -2rem;
+        height: 80%;
+        border-radius: 0.2rem;
+        transition: left 300ms ease-out;
+      }
+    }
+
+    &_icon {
+      width: 3rem;
+      display: flex;
+      justify-content: center;
+      color: var(--cl-primary);
+
+      & svg {
+        transition: color 300ms ease-in;
+      }
+    }
+
+    &_link {
+      transition: color 300ms ease-in;
+      font-weight: 500;
+    }
+  }
+}

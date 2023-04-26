@@ -2,4 +2,8 @@
   height: var(--nav-height);
   background: var(--bg-primary);
   border-bottom: var(--bg-secondary) 1px solid;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

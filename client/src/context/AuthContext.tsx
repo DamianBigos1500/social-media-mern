@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 import IUser from '../types/IUser';
 import axios from '../lib/axios';
-
+import BACKEND_URL from '../config/BACKEND_URL';
 interface AuthContextProps {
   user: IUser | null;
   setUser: any;
@@ -17,18 +17,22 @@ interface AuthContextProviderProps {
 }
 
 const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser | null>({
+    id: '1',
+    email: 'daravix1500@gmail.com',
+    first_name: 'Damian',
+    last_name: 'Bigos',
+    picture: ''
+  });
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await axios.get(
-          'http://127.0.0.1:8000/auth/login/success'
-        );
+        const response = await axios.get(`${BACKEND_URL}/auth/login/success`);
 
         setUser(response.data.user);
-        console.log('error');
+        console.log('user is active');
         setIsLoading(false);
       } catch (error) {
         console.log(error);

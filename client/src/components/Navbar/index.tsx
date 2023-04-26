@@ -1,19 +1,19 @@
-import { FC, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import { FC } from 'react';
 import styles from './navbar.module.scss';
+import Logo from '../Logo';
+import NavbarIcons from '../NavbarIcons';
+import NavbarSearch from '../NavbarSearch';
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
-  const { user } = useContext(AuthContext);
 
   return (
     <div className={styles.navbar}>
-      <Link to="/">Home</Link>
-      <Link to="/login">Login</Link>
+      <Logo />
+      <NavbarSearch />
+      <NavbarIcons />
 
-      {user && <span>{user?.email}</span>}
     </div>
   );
 };
