@@ -1,0 +1,18 @@
+@import '../../styles/mixins';
+
+.nav__liked_pages {
+  margin-top: 2rem;
+  padding-left: 0.6rem;
+
+  &__title {
+    @include sidebar_title;
+    margin-left: 0.4rem;
+  }
+
+  &_list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sidebar-nav-gap);
+  }
+}

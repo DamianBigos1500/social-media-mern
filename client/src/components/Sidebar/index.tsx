@@ -2,6 +2,7 @@ import { FC } from 'react';
 import styles from './sidebar.module.scss';
 import SidebarUser from '../SidebarUser';
 import SidebarNavigation from '../SidebarNavigation';
+import NavbarLikedPages from '../NavbarLikedPages';
 
 interface SidebarProps {}
 
@@ -11,6 +12,8 @@ const Sidebar: FC<SidebarProps> = ({}) => {
       <SidebarUser />
 
       <SidebarNavigation />
+
+      <NavbarLikedPages />
     </div>
   );
 };

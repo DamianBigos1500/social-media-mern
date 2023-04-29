@@ -1,0 +1,17 @@
+@mixin sidebar_title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--cl-primary);
+  text-transform: uppercase;
+}
+
+@mixin blob {
+  content: '_';
+  position: absolute;
+  width: 1rem;
+  background: var(--cl-base);
+  left: -2rem;
+  height: 80%;
+  border-radius: 0.2rem;
+  transition: left var(--hover-transition) ease-out;
+}

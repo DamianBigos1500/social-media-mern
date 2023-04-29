@@ -4,10 +4,14 @@ import { HiOutlineChatBubbleOvalLeftEllipsis } from 'react-icons/hi2';
 import { HiOutlinePhoto } from 'react-icons/hi2';
 import { FaUserFriends } from 'react-icons/fa';
 import { BiCategory } from 'react-icons/bi';
+import { BiSearchAlt } from 'react-icons/bi';
+import { BsHouse } from 'react-icons/bs';
+import { BsGithub } from 'react-icons/bs';
+import { BsGoogle } from 'react-icons/bs';
 import { BsCalendar4Event } from 'react-icons/bs';
 import { BsPlayBtn } from 'react-icons/bs';
 import { FiFileText } from 'react-icons/fi';
-import { BsHouse } from 'react-icons/bs';
+import { IoMdNotificationsOutline } from 'react-icons/io';
 
 interface IIcons {
   AiOutlineUserAdd: FC;
@@ -54,6 +58,22 @@ Icons.FiFileText = ({ ...props }: IconProps) => {
 
 Icons.BsHouse = ({ ...props }: IconProps) => {
   return <BsHouse {...props} />;
+};
+
+Icons.BsGithub = ({ ...props }: IconProps) => {
+  return <BsGithub {...props} />;
+};
+
+Icons.BsGoogle = ({ ...props }: IconProps) => {
+  return <BsGoogle {...props} />;
+};
+
+Icons.IoMdNotificationsOutline = ({ ...props }: IconProps) => {
+  return <IoMdNotificationsOutline {...props} />;
+};
+
+Icons.BiSearchAlt = ({ ...props }: IconProps) => {
+  return <BiSearchAlt {...props} />;
 };
 
 export default Icons;

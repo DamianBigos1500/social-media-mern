@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import Navbar from '../../components/Navbar';
 import { Outlet } from 'react-router-dom';
 import React from 'react';
@@ -11,16 +11,20 @@ interface RootLayoutProps {}
 const RootLayout: FC<RootLayoutProps> = ({}) => {
   return (
     <div>
-      <Navbar />
-      <React.Suspense fallback={<>...</>}>
+      <Suspense fallback={<>...</>}>
+        <Navbar />
         <div className={styles.root_content}>
           <Sidebar />
-          <div className={styles.content}>
-            <Outlet />
-          </div>
+
+          <Suspense fallback={<>Loading</>}>
+            <div className={styles.content}>
+              <Outlet />
+            </div>
+          </Suspense>
+
           <SidebarRight />
         </div>
-      </React.Suspense>
+      </Suspense>
     </div>
   );
 };

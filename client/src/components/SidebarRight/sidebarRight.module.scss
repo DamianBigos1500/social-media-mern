@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 .sidebar_right {
   align-self: flex-end;
   height: var(--content-height);
@@ -11,14 +13,12 @@
 
   &__friends {
     &_title {
-      font-size: 1rem;
-      margin-top: 1rem;
+      @include sidebar_title;
+      margin: 1rem 0;
       margin-left: 1rem;
-      font-weight: 500;
     }
 
     &_list {
-      margin-top: 1rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;

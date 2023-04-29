@@ -6,9 +6,9 @@ const loginSuccess = function (req: any, res: any) {
       user: req.user,
     });
   } else {
-    res.status(404).json({
+    res.status(403).json({
       success: false,
-      message: 'successfull',
+      message: 'failiture',
       user: req.user,
     });
   }

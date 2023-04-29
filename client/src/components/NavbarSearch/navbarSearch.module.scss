@@ -1,3 +1,31 @@
 .nav_search {
-  
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 60%;
+
+  &__bar {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    width: max(50%, 20rem);
+  }
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    color: var(--cl-);
+    background: var(--bg-secondary);
+    border: 1px solid var(--cl-primary);
+    outline: none;
+    border-radius: 0.6rem;
+    padding: 0.4rem;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 0.2rem;
+    top: 50%;
+    transform: translateY(-37%);
+  }
 }

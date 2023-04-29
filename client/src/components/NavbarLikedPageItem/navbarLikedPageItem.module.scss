@@ -1,0 +1,35 @@
+@import '../../styles/mixins';
+
+
+.nav__liked_page {
+  display: flex;
+  height: var(--sidebar-nav-item-height);
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+
+  & > span:first-child {
+    width: 3rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & > span:last-child {
+    color: var(--cl-primary);
+  }
+
+  &:hover > span:last-child {
+    color: var(--cl-base);
+    transition: color var(--hover-transition) ease-in;
+  }
+
+  &:hover::before {
+    left: -1.4rem;
+  }
+
+  &::before {
+    @include blob;
+  }
+}

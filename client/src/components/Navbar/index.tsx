@@ -7,13 +7,13 @@ import NavbarSearch from '../NavbarSearch';
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
-
   return (
     <div className={styles.navbar}>
-      <Logo />
-      <NavbarSearch />
+      <div className={styles.navbar_left}>
+        <Logo />
+        <NavbarSearch />
+      </div>
       <NavbarIcons />
-
     </div>
   );
 };

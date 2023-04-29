@@ -7,8 +7,18 @@ import redirectBackUrl from '../middleware/redirectBackUrl';
 import loginSuccess from '../controllers/auth/passport/login-success';
 import loginFailed from '../controllers/auth/passport/login-failed';
 import logout from '../controllers/auth/passport/logout';
+import registerController from '../controllers/auth/custom/register';
+import createUserValidator from '../utils/validators/createUserValidator';
+import handleValidation from '../utils/validators/handleValidation';
 
 const router = express.Router();
+
+router.post(
+  '/register',
+  createUserValidator,
+  handleValidation,
+  registerController
+);
 
 router.get('/login/success', loginSuccess);
 router.get('/login/failed', loginFailed);

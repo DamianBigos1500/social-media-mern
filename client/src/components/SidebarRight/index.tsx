@@ -112,8 +112,8 @@ const SidebarRight: FC<SidebarRightProps> = ({}) => {
         <h2 className={styles.sidebar_right__friends_title}>Friends</h2>
 
         <ul className={styles.sidebar_right__friends_list}>
-          {friends.map((friend) => (
-            <li className={styles.sidebar_right__friend}>
+          {friends.map((friend, index) => (
+            <li key={index} className={styles.sidebar_right__friend}>
               <span className={styles.sidebar_right__friend_info}>
                 <img src={friend.image} alt="" />
                 <span>{friend.full_name}</span>
