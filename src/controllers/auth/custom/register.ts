@@ -1,7 +1,6 @@
-import { sendEmail } from './../../../libs/mailer';
 import { NextFunction, Request, Response } from 'express';
 import prisma from '../../../libs/server';
-import Users from '../../../models/User';
+import User from '../../../models/User';
 import HttpError from '../../../models/HttpError';
 
 const registerController = async function (
@@ -14,22 +13,26 @@ const registerController = async function (
   let newUser = null;
 
   try {
-    // const users = new Users(prisma.user);
-    // newUser = await users.signup({
-    //   first_name,
-    //   last_name,
-    //   email,
-    //   provider: 'credentials',
-    //   password,
-    // });
-    sendEmail('asdasd', 'asdasd', 'asdads');
-
-    console.log(newUser);
+    const user = new User(prisma.user);
+    newUser = await user.signup({
+      first_name,
+      last_name,
+      email,
+      provider: 'credentials',
+      password,
+    });
+    await user.sendVerificationEmail();
   } catch (err: any) {
     return next(new HttpError('Could not register new user', 500));
   }
 
-  return res.status(200).json({ message: req.body, user: newUser });
+  return res
+    .status(200)
+    .json({
+      success: true,
+      message: 'Succesfully created account, please check your email',
+      user: newUser,
+    });
 };
 
 export default registerController;

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { AiOutlineUserAdd } from 'react-icons/ai';
+import { AiFillCaretDown, AiOutlineUserAdd } from 'react-icons/ai';
 import { HiOutlineChatBubbleOvalLeftEllipsis } from 'react-icons/hi2';
 import { HiOutlinePhoto } from 'react-icons/hi2';
 import { FaUserFriends } from 'react-icons/fa';
@@ -74,6 +74,10 @@ Icons.IoMdNotificationsOutline = ({ ...props }: IconProps) => {
 
 Icons.BiSearchAlt = ({ ...props }: IconProps) => {
   return <BiSearchAlt {...props} />;
+};
+
+Icons.AiFillCaretDown = ({ ...props }: IconProps) => {
+  return <AiFillCaretDown {...props} />;
 };
 
 export default Icons;

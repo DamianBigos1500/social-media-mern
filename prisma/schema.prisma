@@ -16,6 +16,7 @@ model User {
   last_name    String
   username     String?
   provider     String
+  verifiedAt   String?
   email        String    @unique
   password     String?
   picture      String?

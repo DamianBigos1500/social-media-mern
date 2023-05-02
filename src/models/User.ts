@@ -1,5 +1,8 @@
-import { Prisma, PrismaClient, User } from '@prisma/client';
+import { PrismaClient, User as PrismaUser } from '@prisma/client';
 import bcrypt from 'bcrypt';
+import { sendEmail } from '../libs/sendEmail';
+import path from 'path';
+import { readHTMLFile } from '../utils/validators/readFile';
 
 type Signup = {
   first_name: String;
@@ -9,11 +12,11 @@ type Signup = {
   password: String;
 };
 
-class Users {
+class User {
   constructor(private readonly prismaUser: PrismaClient['user']) {}
 
   // Signup a new user
-  async signup(data: any): Promise<User> {
+  async signup(data: any): Promise<PrismaUser> {
     const hashedPassword = this.hashPassword(data.password);
     // console.log(hashedPassword);
 
@@ -26,6 +29,17 @@ class Users {
     const salt = bcrypt.genSaltSync(12);
     return bcrypt.hashSync(password, salt);
   }
+
+  sendVerificationEmail = async () => {
+    console.log(this);
+
+    const htmlContent = await readHTMLFile(
+      path.join(__dirname, '..', 'pages', 'emails', 'verificationAccount.html'),
+      { user: 'Damian' }
+    );
+
+    sendEmail('fococi2267@saeoil.com', 'Verification Email', htmlContent);
+  };
 }
 
-export default Users;
+export default User;

@@ -1,15 +1,28 @@
-import { FC, useState } from 'react';
+import { FC, Suspense, useState } from 'react';
 import { Form, redirect } from 'react-router-dom';
 import axios from '../../lib/axios';
 import BACKEND_URL from '../../config/BACKEND_URL';
 import Logo from '../../components/Logo';
 import styles from './login.module.scss';
+import useAuth from '../../hooks/useAuth';
 
 interface LoginProps {}
 
 const Login: FC<LoginProps> = ({}) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string>('');
   const [mode, setMode] = useState<string>('login');
+
+  const { setUser } = useAuth();
+
+  const fastLogin = () => {
+    setUser({
+      id: '1',
+      email: 'daravix1500@gmail.com',
+      first_name: 'Damian',
+      last_name: 'Bigos',
+      picture: '',
+    });
+  };
 
   const onLoginAuth = (provider: string | null = null) => {
     if (provider) {
@@ -22,71 +35,75 @@ const Login: FC<LoginProps> = ({}) => {
   };
 
   return (
-    <section className={styles.login}>
-      <Logo />
+      <section className={styles.login}>
+        <Logo />
 
-      <Form className={styles.login__form} method="post" action="">
-        {mode === 'login' ? (
-          <>
-            <legend>Login</legend>
-            <div>
-              <label htmlFor="size_1">email</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(e: any) => setEmail(e.target.value)}
-              />
-            </div>
+        <Form className={styles.login__form} method="post" action="">
+          {mode === 'login' ? (
+            <>
+              <legend>Login</legend>
+              <div>
+                <label htmlFor="size_1">email</label>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  value={email}
+                  onChange={(e: any) => setEmail(e.target.value)}
+                />
+              </div>
 
-            <div>
-              <label htmlFor="size_2">password</label>
-              <input type="password" name="password" id="password" />
-            </div>
+              <div>
+                <label htmlFor="size_2">password</label>
+                <input type="password" name="password" id="password" />
+              </div>
 
-            <button>Send</button>
-          </>
-        ) : (
-          <>
-            <legend>Register</legend>
-            <div>
-              <label htmlFor="size_1">email</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(e: any) => setEmail(e.target.value)}
-              />
-            </div>
+              <button>Send</button>
+            </>
+          ) : (
+            <>
+              <legend>Register</legend>
+              <div>
+                <label htmlFor="size_1">email</label>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  value={email}
+                  onChange={(e: any) => setEmail(e.target.value)}
+                />
+              </div>
 
-            <div>
-              <label htmlFor="size_2">password</label>
-              <input type="password" name="password" id="password" />
-            </div>
+              <div>
+                <label htmlFor="size_2">password</label>
+                <input type="password" name="password" id="password" />
+              </div>
 
-            <button>Send</button>
-          </>
-        )}
+              <button>Send</button>
+            </>
+          )}
 
-        <div className={''}>
-          <button
-            className={`${styles.login__btn} ${styles.btn_google}`}
-            onClick={() => onLoginAuth('google')}
-          >
-            <span>Sing up with Google</span>
-          </button>
+          <div className={''}>
+            <button
+              className={`${styles.login__btn} ${styles.btn_google}`}
+              onClick={() => onLoginAuth('google')}
+            >
+              <span>Sing up with Google</span>
+            </button>
 
-          <button
-            className={`${styles.login__btn} ${styles.btn_github}`}
-            onClick={() => onLoginAuth('github')}
-          >
-            <span>Sing up with Github</span>
-          </button>
-        </div>
-      </Form>
-    </section>
+            <button
+              className={`${styles.login__btn} ${styles.btn_github}`}
+              onClick={() => onLoginAuth('github')}
+            >
+              <span>Sing up with Github</span>
+            </button>
+
+            <button className={`${styles.login__btn}`} onClick={fastLogin}>
+              <span>Fast login</span>
+            </button>
+          </div>
+        </Form>
+      </section>
   );
 };
 

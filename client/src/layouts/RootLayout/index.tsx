@@ -1,30 +1,30 @@
 import { FC, Suspense } from 'react';
 import Navbar from '../../components/Navbar';
 import { Outlet } from 'react-router-dom';
-import React from 'react';
 import Sidebar from '../../components/Sidebar';
 import styles from './rootLayout.module.scss';
 import SidebarRight from '../../components/SidebarRight';
+import Protected from '../../features/auth/components/Protected';
 
 interface RootLayoutProps {}
 
 const RootLayout: FC<RootLayoutProps> = ({}) => {
   return (
     <div>
-      <Suspense fallback={<>...</>}>
-        <Navbar />
-        <div className={styles.root_content}>
-          <Sidebar />
+      <Protected>
+        <>
+          <Navbar />
+          <div className={styles.root_content}>
+            <Sidebar />
 
-          <Suspense fallback={<>Loading</>}>
             <div className={styles.content}>
               <Outlet />
             </div>
-          </Suspense>
 
-          <SidebarRight />
-        </div>
-      </Suspense>
+            <SidebarRight />
+          </div>
+        </>
+      </Protected>
     </div>
   );
 };

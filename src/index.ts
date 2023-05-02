@@ -48,7 +48,7 @@ if (isProd) {
   });
 } else {
   app.get('/', (req: Request, res: Response) => {
-    console.log({ user: req.session });
+    // console.log({ user: req.session.passport.user });
     res.send(
       `Express + TypeScript Server http://localhost:${process.env.PORT}`
     );

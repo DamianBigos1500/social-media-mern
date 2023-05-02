@@ -1,13 +1,11 @@
-import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import RootLayout from './layouts/RootLayout';
-import { action } from './page/Login';
+import Login, { action } from './page/Login';
 import Providers from './components/Providers';
 import DashboardLayout from './layouts/DashboardLayout';
-
-const Home = React.lazy(() => import('./page/Home'));
-const Login = React.lazy(() => import('./page/Login'));
-const NotFound = React.lazy(() => import('./page/NotFound'));
+import UnAuthenticated from './features/auth/components/Unauthorized';
+import Home from './page/Home';
+import NotFound from './page/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +14,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/login',
-        element: <Login />,
+        element: (
+          <UnAuthenticated>
+            <Login />
+          </UnAuthenticated>
+        ),
         action: action,
       },
       {

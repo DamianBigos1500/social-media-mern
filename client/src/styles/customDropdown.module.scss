@@ -1,0 +1,17 @@
+.dropdown {
+  &__trigger {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  &__content {
+    background: red;
+
+    &[data-state='open'] {
+      width: 0;
+      overflow: hidden;
+    }
+  }
+}

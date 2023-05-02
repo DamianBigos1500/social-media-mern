@@ -1,13 +1,15 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode, createContext, useEffect, useState } from 'react';
 import IUser from '../types/IUser';
 import axios from '../lib/axios';
 import BACKEND_URL from '../config/BACKEND_URL';
+
 interface AuthContextProps {
   user: IUser | null;
   setUser: any;
+  isAuthenticated?: boolean;
 }
 
-export const AuthContext = React.createContext<AuthContextProps>({
+export const AuthContext = createContext<AuthContextProps>({
   user: null,
   setUser: null,
 });
@@ -17,13 +19,7 @@ interface AuthContextProviderProps {
 }
 
 const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<IUser | null>({
-    id: '1',
-    email: 'daravix1500@gmail.com',
-    first_name: 'Damian',
-    last_name: 'Bigos',
-    picture: ''
-  });
+  const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -46,7 +42,9 @@ const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) => {
   if (isLoading) return null;
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider
+      value={{ user, setUser, isAuthenticated: user ? true : false }}
+    >
       {children}
     </AuthContext.Provider>
   );

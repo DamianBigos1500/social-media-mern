@@ -10,6 +10,7 @@ import logout from '../controllers/auth/passport/logout';
 import registerController from '../controllers/auth/custom/register';
 import createUserValidator from '../utils/validators/createUserValidator';
 import handleValidation from '../utils/validators/handleValidation';
+import sendVerification from '../controllers/auth/custom/sendVerification';
 
 const router = express.Router();
 
@@ -39,5 +40,7 @@ router.post(
   passportCustom.customLogin,
   redirectBackUrl
 );
+
+router.post('/send-verification', sendVerification)
 
 export default router;
