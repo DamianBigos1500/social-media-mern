@@ -14,7 +14,7 @@ import path from 'path';
 import nextErrors from './middleware/nextErrors';
 
 const app: Express = express();
-const isProd = false;
+const isProd = true;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

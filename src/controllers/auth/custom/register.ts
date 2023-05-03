@@ -21,18 +21,17 @@ const registerController = async function (
       provider: 'credentials',
       password,
     });
+    
     await user.sendVerificationEmail();
   } catch (err: any) {
     return next(new HttpError('Could not register new user', 500));
   }
 
-  return res
-    .status(200)
-    .json({
-      success: true,
-      message: 'Succesfully created account, please check your email',
-      user: newUser,
-    });
+  return res.status(200).json({
+    success: true,
+    message: 'Succesfully created account, please check your email',
+    user: newUser,
+  });
 };
 
 export default registerController;

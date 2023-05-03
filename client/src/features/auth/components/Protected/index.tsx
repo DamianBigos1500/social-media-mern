@@ -8,12 +8,12 @@ type ProtectedProps = {
 
 const Protected: FC<ProtectedProps> = ({ children }) => {
   const { isAuthenticated } = useAuth();
-  const location = useLocation().pathname;
+  const location = useLocation();
 
   return isAuthenticated ? (
     children
   ) : (
-    <Navigate to={'/login'} state={{ from: location }}  />
+    <Navigate to={'/login'} state={{ from: location.pathname }} />
   );
 };
 

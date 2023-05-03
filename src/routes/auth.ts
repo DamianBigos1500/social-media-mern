@@ -11,6 +11,7 @@ import registerController from '../controllers/auth/custom/register';
 import createUserValidator from '../utils/validators/createUserValidator';
 import handleValidation from '../utils/validators/handleValidation';
 import sendVerification from '../controllers/auth/custom/sendVerification';
+import activateAccount from '../controllers/auth/custom/activateAccount';
 
 const router = express.Router();
 
@@ -23,7 +24,8 @@ router.post(
 
 router.get('/login/success', loginSuccess);
 router.get('/login/failed', loginFailed);
-router.get('/logout', logout);
+router.post('/logout', logout);
+router.post('/activate', activateAccount);
 
 // google
 router.get('/google', getRedirectBackUrl, passportGoogle.googleLogin);
@@ -41,6 +43,6 @@ router.post(
   redirectBackUrl
 );
 
-router.post('/send-verification', sendVerification)
+router.post('/send-verification', sendVerification);
 
 export default router;

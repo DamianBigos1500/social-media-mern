@@ -48,6 +48,7 @@ export const sendEmail = async (
   // Send email using transporter object
   try {
     const data = await transporter.sendMail(mailOptions);
+    return data;
   } catch (error) {
     throw error;
   }

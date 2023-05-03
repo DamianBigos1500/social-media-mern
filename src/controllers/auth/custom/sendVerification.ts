@@ -11,11 +11,11 @@ const sendVerification = async function (
   try {
     // const user = new User(prisma.user);
     const { user }: any = req.session?.passport;
-    const prismaUser = await prisma.user.findUnique({
+    const loggedUser = await prisma.user.findUnique({
       where: { email: user.email },
     });
 
-    const newuser = new User(prisma.user);
+    const newuser = new User(prisma.user, loggedUser);
     await newuser.sendVerificationEmail();
   } catch (err: any) {
     return next(new HttpError('Could not send email to user', 500));

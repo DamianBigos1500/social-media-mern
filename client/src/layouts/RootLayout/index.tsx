@@ -5,14 +5,13 @@ import Sidebar from '../../components/Sidebar';
 import styles from './rootLayout.module.scss';
 import SidebarRight from '../../components/SidebarRight';
 import Protected from '../../features/auth/components/Protected';
+import LoadingSpinner from '../../LoadingSpinner';
 
 interface RootLayoutProps {}
 
 const RootLayout: FC<RootLayoutProps> = ({}) => {
   return (
     <div>
-      <Protected>
-        <>
           <Navbar />
           <div className={styles.root_content}>
             <Sidebar />
@@ -23,8 +22,6 @@ const RootLayout: FC<RootLayoutProps> = ({}) => {
 
             <SidebarRight />
           </div>
-        </>
-      </Protected>
     </div>
   );
 };

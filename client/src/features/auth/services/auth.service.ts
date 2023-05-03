@@ -1,15 +1,12 @@
-import axios from '@/lib/axios';
+import axios from '../../../lib/axios';
 
 const authService = {
   login: async () => {
-    try {
-      await axios.post('/auth/login', {});
-    } catch (error) {
-      throw error;
-    }
+    return axios.post('/auth/login', {});
   },
+
   logout: async () => {
-    await axios.post('/auth/logout');
+    return axios.post('/auth/logout');
   },
 };
 

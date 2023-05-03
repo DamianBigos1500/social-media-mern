@@ -1,0 +1,24 @@
+.nav {
+  &__dropdown_menu {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+
+    &:hover .nav__icon {
+      color: var(--cl-primary);
+    }
+  }
+
+  &__profile_image {
+    width: 2.6rem;
+    border-radius: 50%;
+  }
+
+  &__icon {
+    color: var(--cl-base);
+    cursor: pointer;
+    transition: all 150ms;
+  }
+
+
+}
