@@ -1,9 +1,9 @@
 import express from 'express';
-import userRouter from './user.router';
+import findUser from '../controllers/user/findUser';
 
 const router = express.Router();
 
-router.use(userRouter);
+router.get('/find-user', findUser);
 // router.post('/logout', logout);
 
 export default router;

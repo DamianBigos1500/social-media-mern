@@ -12,9 +12,9 @@ import sessionOptions from './config/session';
 import apiRoutes from './routes/api';
 import path from 'path';
 import nextErrors from './middleware/nextErrors';
+import { IS_PRODUCTION } from './data/IS_PRODUCTION';
 
 const app: Express = express();
-const isProd = true;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,14 +32,14 @@ app.use('/api', apiRoutes);
 
 app.use(nextErrors);
 
-if (isProd) {
-  app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
+if (IS_PRODUCTION) {
+  app.use(express.static(path.join(__dirname,'..', 'public', 'dist')));
 
   app.use((req: Request, res: Response) => {
     const filePath = path.resolve(
       __dirname,
       '..',
-      'client',
+      'public',
       'dist',
       'index.html'
     );

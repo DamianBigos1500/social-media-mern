@@ -8,7 +8,7 @@ const loginSuccess = function (req: any, res: any) {
   } else {
     res.status(403).json({
       success: false,
-      message: 'failiture',
+      message: 'You are not logged in',
       user: req.user,
     });
   }

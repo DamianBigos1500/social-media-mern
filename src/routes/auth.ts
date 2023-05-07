@@ -1,7 +1,7 @@
 import express from 'express';
-import passportGoogle from '../controllers/auth/passport/passport-google';
-import passportGithub from '../controllers/auth/passport/passport-github';
-import passportCustom from '../controllers/auth/passport/passport-custom';
+import passportGoogle from '../controllers/auth/passport/google.strategy';
+import passportGithub from '../controllers/auth/passport/github.strategy';
+import passportCustom from '../controllers/auth/passport/custom.strategy';
 import getRedirectBackUrl from '../middleware/getRedirectBackUrl';
 import redirectBackUrl from '../middleware/redirectBackUrl';
 import loginSuccess from '../controllers/auth/passport/login-success';
@@ -22,7 +22,7 @@ router.post(
   registerController
 );
 
-router.get('/login/success', loginSuccess);
+router.get('/user', loginSuccess);
 router.get('/login/failed', loginFailed);
 router.post('/logout', logout);
 router.post('/activate', activateAccount);

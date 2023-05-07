@@ -23,23 +23,21 @@ const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const response = await axios.get(`${BACKEND_URL}/auth/login/success`);
-
-        setUser(response.data.user);
-        console.log('user is active');
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-        setIsLoading(false);
-      }
-    };
-
     getUser();
   }, []);
 
-  if (isLoading) return null;
+  const getUser = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/auth/user`);
+
+      setUser(response.data.user);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <AuthContext.Provider

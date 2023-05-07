@@ -5,29 +5,35 @@ import BACKEND_URL from '../../config/BACKEND_URL';
 import Logo from '../../components/Logo';
 import styles from './login.module.scss';
 import useAuth from '../../hooks/useAuth';
+import FRONTEND_URL from '../../config/FRONTEND_URL';
+import Icons from '../../components/Icons';
 
 interface LoginProps {}
 
 const Login: FC<LoginProps> = ({}) => {
   const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [mode, setMode] = useState<string>('login');
   const location = useLocation();
 
   const { setUser } = useAuth();
 
   const fastLogin = () => {
-    setUser({
-      id: '1',
-      email: 'daravix1500@gmail.com',
-      first_name: 'Damian',
-      last_name: 'Bigos',
-      picture: '',
-    });
+    // setUser({
+    //   id: '1',
+    //   email: 'daravix1500@gmail.com',
+    //   first_name: 'Damian',
+    //   last_name: 'Bigos',
+    //   picture: '',
+    // });
+
+    setEmail('');
+    setPassword('');
   };
 
   const onLoginAuth = (provider: string | null = null) => {
     if (provider) {
-      const previousUrl = `${BACKEND_URL}${location?.state?.from}`;
+      const previousUrl = `${FRONTEND_URL}${location?.state?.from}`;
       window.open(
         `${BACKEND_URL}/auth/${provider}?redirectUrl=${previousUrl}`,
         '_self'
@@ -43,8 +49,8 @@ const Login: FC<LoginProps> = ({}) => {
         {mode === 'login' ? (
           <>
             <legend>Login</legend>
-            <div>
-              <label htmlFor="size_1">email</label>
+            <fieldset>
+              <label htmlFor="size_1">Email</label>
               <input
                 type="text"
                 name="email"
@@ -52,14 +58,14 @@ const Login: FC<LoginProps> = ({}) => {
                 value={email}
                 onChange={(e: any) => setEmail(e.target.value)}
               />
-            </div>
+            </fieldset>
 
-            <div>
-              <label htmlFor="size_2">password</label>
+            <fieldset>
+              <label htmlFor="size_2">Password</label>
               <input type="password" name="password" id="password" />
-            </div>
+            </fieldset>
 
-            <button>Send</button>
+            <button type='submit'>Send</button>
           </>
         ) : (
           <>
@@ -84,22 +90,28 @@ const Login: FC<LoginProps> = ({}) => {
           </>
         )}
 
-        <div className={''}>
+        <div className={styles.login__strategies}>
           <button
             className={`${styles.login__btn} ${styles.btn_google}`}
             onClick={() => onLoginAuth('google')}
           >
-            <span>Sing up with Google</span>
+            <span className={styles.btn__icon}>
+              <Icons.GoogleIcon fill="white" width="16" height="16" />
+            </span>
+            <span>Continue with Google</span>
           </button>
 
           <button
             className={`${styles.login__btn} ${styles.btn_github}`}
             onClick={() => onLoginAuth('github')}
           >
-            <span>Sing up with Github</span>
+            <span className={styles.btn__icon}>
+              <Icons.GithubIcon fill="white" width="16" height="16" />
+            </span>
+            <span>Continue with Github</span>
           </button>
 
-          <button className={`${styles.login__btn}`} onClick={fastLogin}>
+          <button className={`${styles.login__btn} ${styles.btn_default}`} onClick={fastLogin}>
             <span>Fast login</span>
           </button>
         </div>
