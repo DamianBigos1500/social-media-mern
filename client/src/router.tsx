@@ -20,18 +20,14 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: (
-          <UnAuthenticated>
             <Login />
-          </UnAuthenticated>
         ),
         action: action,
       },
       {
         path: '/',
         element: (
-          <Protected>
             <RootLayout />
-          </Protected>
         ),
         children: [
           {
@@ -55,7 +51,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/',
+        path: '/dashboard',
         element: <DashboardLayout />,
         children: [
           { path: '/', element: <Home /> },

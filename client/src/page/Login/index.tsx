@@ -18,14 +18,12 @@ const Login: FC<LoginProps> = ({}) => {
 
   const { setUser } = useAuth();
 
-  const fastLogin = () => {
-    // setUser({
-    //   id: '1',
-    //   email: 'daravix1500@gmail.com',
-    //   first_name: 'Damian',
-    //   last_name: 'Bigos',
-    //   picture: '',
-    // });
+  const fastLogin = async () => {
+    const user = await axios.post(`${BACKEND_URL}/auth/login`, {
+      email: 'w@w.com',
+    });
+
+    console.log(user);
 
     setEmail('');
     setPassword('');
@@ -65,7 +63,7 @@ const Login: FC<LoginProps> = ({}) => {
               <input type="password" name="password" id="password" />
             </fieldset>
 
-            <button type='submit'>Send</button>
+            <button type="submit">Send</button>
           </>
         ) : (
           <>
@@ -111,7 +109,10 @@ const Login: FC<LoginProps> = ({}) => {
             <span>Continue with Github</span>
           </button>
 
-          <button className={`${styles.login__btn} ${styles.btn_default}`} onClick={fastLogin}>
+          <button
+            className={`${styles.login__btn} ${styles.btn_default}`}
+            onClick={fastLogin}
+          >
             <span>Fast login</span>
           </button>
         </div>

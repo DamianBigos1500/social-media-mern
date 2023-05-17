@@ -25,16 +25,17 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/files', express.static(__dirname + '/public'));
+if (IS_PRODUCTION) {
+  app.use(express.static(path.join(__dirname, '..', 'public', 'dist')));
+}
 
+app.use('/files', express.static(__dirname + '/public'));
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
 app.use(nextErrors);
 
 if (IS_PRODUCTION) {
-  app.use(express.static(path.join(__dirname,'..', 'public', 'dist')));
-
   app.use((req: Request, res: Response) => {
     const filePath = path.resolve(
       __dirname,
