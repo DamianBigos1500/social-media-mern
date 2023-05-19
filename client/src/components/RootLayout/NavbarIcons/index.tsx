@@ -1,14 +1,13 @@
 import { FC, useContext } from 'react';
 import styles from './navbarIcons.module.scss';
-import Icons from '../Icons';
-import { AuthContext } from '../../context/AuthContext';
+import Icons from '../../UI/Icons';
+import { AuthContext } from '../../../context/AuthContext';
 import NavbarDropdown from '../NavbarDropdown';
 
 interface NavbarIconsProps {}
 
 const NavbarIcons: FC<NavbarIconsProps> = ({}) => {
   const { user } = useContext(AuthContext);
-
 
   return (
     <div className={styles.nav__icons}>

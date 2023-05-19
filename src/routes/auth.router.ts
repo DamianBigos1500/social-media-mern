@@ -36,10 +36,7 @@ router.get('/github', getRedirectBackUrl, passportGithub.githubLogin);
 router.get('/github/callback', passportGithub.githubCallback, redirectBackUrl);
 
 // custom
-router.post(
-  '/login',
-  passportCustom.customLogin,
-);
+router.post('/login', passportCustom.customLogin);
 
 router.post('/send-verification', sendVerification);
 

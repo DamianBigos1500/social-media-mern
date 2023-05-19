@@ -1,122 +1,43 @@
 import { FC, useState } from 'react';
-import { Form, redirect, useLocation } from 'react-router-dom';
-import axios from '../../lib/axios';
-import BACKEND_URL from '../../config/BACKEND_URL';
+import {
+  Form,
+  redirect,
+  useActionData,
+  useLocation,
+  useNavigation,
+  useSubmit,
+} from 'react-router-dom';
 import Logo from '../../components/Logo';
 import styles from './login.module.scss';
-import useAuth from '../../hooks/useAuth';
-import FRONTEND_URL from '../../config/FRONTEND_URL';
-import Icons from '../../components/Icons';
+import LoginForm from '../../features/auth/components/LoginForm/LoginForm';
+import RegisterForm from '../../features/auth/components/RegisterForm/RegisterForm';
+import SocialLogin from '../../features/auth/components/SocialLogin/SocialLogin';
+import authService from '../../features/auth/services/auth.service';
 
 interface LoginProps {}
 
 const Login: FC<LoginProps> = ({}) => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [mode, setMode] = useState<string>('login');
-  const location = useLocation();
+  const [isLogin, setIsLogin] = useState<boolean>(true);
+  const actionData = useActionData();
+  // let submit = useSubmit();
 
-  const { setUser } = useAuth();
+  // submit(null, {
+  //   method: 'post',
+  //   action: '/login',
+  // });
 
-  const fastLogin = async () => {
-    const user = await axios.post(`${BACKEND_URL}/auth/login`, {
-      email: 'w@w.com',
-    });
-
-    console.log(user);
-
-    setEmail('');
-    setPassword('');
-  };
-
-  const onLoginAuth = (provider: string | null = null) => {
-    if (provider) {
-      const previousUrl = `${FRONTEND_URL}${location?.state?.from}`;
-      window.open(
-        `${BACKEND_URL}/auth/${provider}?redirectUrl=${previousUrl}`,
-        '_self'
-      );
-    }
+  const changeMode = () => {
+    if (isLogin) setIsLogin(false);
+    else setIsLogin(true);
   };
 
   return (
     <section className={styles.login}>
       <Logo />
+      {isLogin ? <LoginForm /> : <RegisterForm />}
 
-      <Form className={styles.login__form} method="post" action="">
-        {mode === 'login' ? (
-          <>
-            <legend>Login</legend>
-            <fieldset>
-              <label htmlFor="size_1">Email</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(e: any) => setEmail(e.target.value)}
-              />
-            </fieldset>
-
-            <fieldset>
-              <label htmlFor="size_2">Password</label>
-              <input type="password" name="password" id="password" />
-            </fieldset>
-
-            <button type="submit">Send</button>
-          </>
-        ) : (
-          <>
-            <legend>Register</legend>
-            <div>
-              <label htmlFor="size_1">email</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(e: any) => setEmail(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="size_2">password</label>
-              <input type="password" name="password" id="password" />
-            </div>
-
-            <button>Send</button>
-          </>
-        )}
-
-        <div className={styles.login__strategies}>
-          <button
-            className={`${styles.login__btn} ${styles.btn_google}`}
-            onClick={() => onLoginAuth('google')}
-          >
-            <span className={styles.btn__icon}>
-              <Icons.GoogleIcon fill="white" width="16" height="16" />
-            </span>
-            <span>Continue with Google</span>
-          </button>
-
-          <button
-            className={`${styles.login__btn} ${styles.btn_github}`}
-            onClick={() => onLoginAuth('github')}
-          >
-            <span className={styles.btn__icon}>
-              <Icons.GithubIcon fill="white" width="16" height="16" />
-            </span>
-            <span>Continue with Github</span>
-          </button>
-
-          <button
-            className={`${styles.login__btn} ${styles.btn_default}`}
-            onClick={fastLogin}
-          >
-            <span>Fast login</span>
-          </button>
-        </div>
-      </Form>
+      <p onClick={() => changeMode()}>change mode</p>
+      <SocialLogin />
     </section>
   );
 };
@@ -125,14 +46,29 @@ export default Login;
 
 export async function action({ request, params }: any) {
   const formData = await request.formData();
-  console.log(formData.get('email'));
 
-  try {
-    axios.post('/auth/login', {
-      email: 'daravix1500@gmail.com',
+  const action = formData.get('action');
+  if (action === 'login') {
+    await authService.login({
+      body: {
+        email: formData.get('email'),
+        password: formData.get('password'),
+      },
     });
-  } catch (error: any) {}
+  } else if (action === 'register') {
+    await authService.register({
+      body: {
+        email: formData.get('email'),
+        password: formData.get('password'),
+      },
+    });
+  }
 
+  // try {
+  //   axios.post('/auth/login', {
+  //     email: formData.get('email'),
+  //   });
+  // } catch (error: any) {}
   const redirectUrl = params.redirectUrl || '/';
 
   return redirect(redirectUrl);

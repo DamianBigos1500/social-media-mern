@@ -1,8 +1,8 @@
 @import '../../styles/mixins';
 
-
 .nav__liked_page {
   display: flex;
+
   height: var(--sidebar-nav-item-height);
   align-items: center;
   position: relative;
@@ -10,6 +10,7 @@
 
   & > span:first-child {
     width: 3rem;
+    flex-shrink: 0;
     color: white;
     display: flex;
     align-items: center;
@@ -31,5 +32,13 @@
 
   &::before {
     @include blob;
+  }
+}
+
+@media screen and (max-width: 1156px) {
+  .nav__liked_page {
+    & > span:last-child {
+      display: none;
+    }
   }
 }

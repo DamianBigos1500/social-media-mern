@@ -4,7 +4,7 @@ import AuthContextProvider from '../../context/AuthContext';
 
 interface ProvidersProps {}
 
-const Providers: FC<ProvidersProps> = ({}) => {
+const Providers: FC<ProvidersProps> = () => {
   return (
     <AuthContextProvider>
       <Outlet />

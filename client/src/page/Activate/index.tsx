@@ -1,13 +1,6 @@
 import axios from '../../lib/axios';
 import { FC, useEffect } from 'react';
-import {
-  defer,
-  isRouteErrorResponse,
-  json,
-  useLoaderData,
-  useParams,
-  useRouteError,
-} from 'react-router-dom';
+import { useLoaderData, useRouteError } from 'react-router-dom';
 
 interface ActivateProps {}
 
@@ -20,7 +13,7 @@ export const activatePageLoader = async ({ params }: any) => {
 export const ActivatePageErrorBoundary = () => {
   let error = useRouteError();
   console.error(error);
-  return <div>Error!</div>;
+  return <div>Error cannot activate account!</div>;
 };
 
 const Activate: FC<ActivateProps> = ({}) => {

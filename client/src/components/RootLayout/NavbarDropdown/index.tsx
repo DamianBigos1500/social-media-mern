@@ -3,12 +3,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from '../UI/Dropdown';
+} from '../../UI/Dropdown';
 import styles from './navbarDropdown.module.scss';
-import IUser from '../../types/IUser';
-import customDropdownStyles from '../../styles/customDropdown.module.scss';
-import authService from '../../features/auth/services/auth.service';
-import Icons from '../Icons';
+import IUser from '../../../types/IUser';
+import customDropdownStyles from '../../../styles/customDropdown.module.scss';
+import authService from '../../../features/auth/services/auth.service';
+import Icons from '../../UI/Icons';
 import { useNavigate } from 'react-router-dom';
 
 interface NavbarDropdownProps {

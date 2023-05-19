@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import RootLayout from './layouts/RootLayout';
 import Login, { action } from './page/Login';
 import Providers from './components/Providers';
-import DashboardLayout from './layouts/DashboardLayout';
 import UnAuthenticated from './features/auth/components/Unauthorized';
 import Home from './page/Home';
 import NotFound from './page/NotFound';
@@ -20,15 +19,16 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: (
+          <UnAuthenticated>
             <Login />
+          </UnAuthenticated>
         ),
         action: action,
       },
+
       {
         path: '/',
-        element: (
-            <RootLayout />
-        ),
+        element: <RootLayout />,
         children: [
           {
             path: '/',
@@ -50,18 +50,14 @@ const router = createBrowserRouter([
           </Protected>
         ),
       },
-      {
-        path: '/dashboard',
-        element: <DashboardLayout />,
-        children: [
-          { path: '/', element: <Home /> },
-          {
-            path: '/login',
-            element: <Login />,
-            action: action,
-          },
-        ],
-      },
+      // {
+      //   path: '/dashboard',
+      //   element: <DashboardLayout />,
+      //   children: [
+      //     { path: '/', element: <div>adsasdads</div> },
+      //     { path: '/profile', element: <div>adsasdads</div> },
+      //   ],
+      // },
       {
         path: '*',
         element: <RootLayout />,

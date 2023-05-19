@@ -1,11 +1,15 @@
 import axios from '../../../lib/axios';
 
 const authService = {
-  login: async () => {
-    return axios.post('/auth/login', {});
+  register: ({ body }: any) => {
+    return axios.post('/auth/register', body);
   },
 
-  logout: async () => {
+  login: ({ body }: any) => {
+    return axios.post('/auth/login', body);
+  },
+
+  logout: () => {
     return axios.post('/auth/logout');
   },
 };

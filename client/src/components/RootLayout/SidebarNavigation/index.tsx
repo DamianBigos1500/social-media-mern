@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styles from './sidebarNavigation.module.scss';
 import { Link } from 'react-router-dom';
-import Icons from '../Icons';
+import Icons from '../../UI/Icons';
 
 interface SidebarNavigationProps {}
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styles from './navbarSearch.module.scss';
-import Icons from '../Icons';
+import Icons from '../../UI/Icons';
 
 interface NavbarSearchProps {}
 

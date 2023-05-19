@@ -1,5 +1,5 @@
 import { FC, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 import styles from './sidebarUser.module.scss';
 
 interface SidebarUserProps {}

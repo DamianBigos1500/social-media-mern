@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styles from './SidebarRight.module.scss';
-import { useTimer } from '../../hooks/useTimer';
+import { useTimer } from '../../../hooks/useTimer';
 
 interface SidebarRightProps {}
 

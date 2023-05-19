@@ -5,11 +5,11 @@ import session from 'express-session';
 import passport from 'passport';
 import './config/passport';
 import cors from 'cors';
-import authRoutes from './routes/auth';
+import authRoutes from './routes/auth.router';
 import cookieParser from 'cookie-parser';
 import corsOptions from './config/cors';
 import sessionOptions from './config/session';
-import apiRoutes from './routes/api';
+import apiRoutes from './routes/api.router';
 import path from 'path';
 import nextErrors from './middleware/nextErrors';
 import { IS_PRODUCTION } from './data/IS_PRODUCTION';
@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
 app.use(cookieParser());
+
 app.use(session(sessionOptions));
 
 app.use(passport.initialize());
@@ -49,9 +50,10 @@ if (IS_PRODUCTION) {
   });
 } else {
   app.get('/', (req: Request, res: Response) => {
-    // console.log({ user: req.session.passport.user });
+    console.log({ user: req.session.passport?.user });
     res.send(
-      `Express + TypeScript Server http://localhost:${process.env.PORT}`
+      `${req?.session?.passport?.user.id}` +
+        `Express + TypeScript Server http://localhost:${process.env.PORT}`
     );
   });
 }

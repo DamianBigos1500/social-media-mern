@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import styles from './navbarLikedPages.module.scss';
-import NavbarLikedPageItem from '../NavbarLikedPageItem';
+import styles from './sidebarLikedPages.module.scss';
+import NavbarLikedPageItem from '../../NavbarLikedPageItem';
 
 interface LikedPagesProps {}
 
