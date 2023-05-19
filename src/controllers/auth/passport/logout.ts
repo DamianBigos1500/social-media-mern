@@ -1,5 +1,4 @@
 function logout(req: any, res: any, next: any) {
-  console.log('here');
 
   req.logout(function (err: any) {
     if (err) {

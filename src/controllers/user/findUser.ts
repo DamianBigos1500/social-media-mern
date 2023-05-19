@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import prisma from '../../libs/server';
 
 async function findUser(req: Request, res: Response) {
   const { email } = req.body;
+  
 
   try {
     const user = await prisma.user.findUnique({

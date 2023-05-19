@@ -2,7 +2,6 @@ import passport from 'passport';
 import passportGoogleOauth20 from 'passport-google-oauth20';
 import passportGithub2 from 'passport-github2';
 import passportCustom from 'passport-custom';
-import { PrismaClient } from '@prisma/client';
 import prisma from '../libs/server';
 
 const GoogleStrategy = passportGoogleOauth20.Strategy;
@@ -60,7 +59,6 @@ passport.use(
       profile: any,
       done: any
     ) {
-      console.log(profile);
       let currentUser;
       try {
         currentUser = await prisma.user.upsert({
@@ -78,7 +76,9 @@ passport.use(
             provider: 'github',
           },
         });
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
 
       done(null, currentUser);
     }
@@ -88,6 +88,7 @@ passport.use(
 passport.use(
   new CustomStrategy(async function (req: any, done: any) {
     let currentUser;
+    console.log(req.body.email);
     try {
       currentUser = await prisma.user.findUnique({
         where: {

@@ -22,7 +22,6 @@ class User {
   // Signup a new user
   async signup(data: any): Promise<PrismaUser> {
     const hashedPassword = this.hashPassword(data.password);
-    // console.log(hashedPassword);
 
     const newUser = await this.prismaUser.create({
       data: { ...data, password: hashedPassword },
@@ -40,7 +39,6 @@ class User {
   sendVerificationEmail = async () => {
     if (!this.user) return;
 
-    console.log(this.user.id);
     const htmlContent = await readHTMLFile(
       path.join(__dirname, '..', 'pages', 'emails', 'verificationAccount.html'),
       {
@@ -49,8 +47,9 @@ class User {
         frontendURL: process.env.CLIENT_URL,
       }
     );
+    console.log('sending')
 
-    sendEmail('rokipo1716@pixiil.com', 'Verification Email', htmlContent);
+    sendEmail('gopeca5982@jwsuns.com', 'Verification Email', htmlContent);
   };
 }
 

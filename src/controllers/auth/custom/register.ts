@@ -9,11 +9,10 @@ const registerController = async function (
   next: NextFunction
 ) {
   const { first_name, last_name, email, password } = req.body;
-
   let newUser = null;
 
+  const user = new User(prisma.user);
   try {
-    const user = new User(prisma.user);
     newUser = await user.signup({
       first_name,
       last_name,
@@ -21,10 +20,13 @@ const registerController = async function (
       provider: 'credentials',
       password,
     });
-    
-    await user.sendVerificationEmail();
   } catch (err: any) {
     return next(new HttpError('Could not register new user', 500));
+  }
+  try {
+    await user.sendVerificationEmail();
+  } catch (error) {
+    return next(new HttpError('Could not send activation email', 500));
   }
 
   return res.status(200).json({
