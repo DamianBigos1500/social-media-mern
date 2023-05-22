@@ -1,0 +1,12 @@
+.home {
+  &_content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+  }
+}

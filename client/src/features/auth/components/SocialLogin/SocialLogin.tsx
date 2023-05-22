@@ -25,6 +25,7 @@ const SocialLogin: FC<SocialLoginProps> = ({}) => {
   const fastLogin = async () => {
     const res = await axios.post(`${BACKEND_URL}/auth/login`, {
       email: 'w@w.com',
+      password: '12345678',
     });
 
     setUser(res.data.user);
@@ -57,7 +58,7 @@ const SocialLogin: FC<SocialLoginProps> = ({}) => {
         className={`${styles.login__btn} ${styles.btn_default}`}
         onClick={fastLogin}
       >
-        <span>Fast login</span>
+        <span>Demo login</span>
       </button>
     </div>
   );
